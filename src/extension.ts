@@ -128,24 +128,24 @@ class StrudelPanel {
 	}
 
 	private _update() {
-		const webview = this._panel.webview;
+		//const webview = this._panel.webview;
 		this._panel.title = "Strudel Test";
-		this._panel.webview.html = this._getHtmlForWebview(webview);
+		this._panel.webview.html = this._getHtmlForWebview();
 	}
 
-	private _getHtmlForWebview(webview: vscode.Webview) {
+	private _getHtmlForWebview() {
 		// Local path to main script run in the webview
-		const scriptPathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media', 'strudel.js');
+		//const scriptPathOnDisk = vscode.Uri.joinPath(this._extensionUri, 'media', 'strudel.js');
 
 		// And the uri we use to load this script in the webview
-		const scriptUri = webview.asWebviewUri(scriptPathOnDisk);
+		//const scriptUri = webview.asWebviewUri(scriptPathOnDisk);
 
 		// Local path to css styles
-		const styleResetPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css');
-		const stylesPathMainPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css');
+		/*const styleResetPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css');
+		const stylesPathMainPath = vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css');*/
 
 		// Uri to load styles into webview
-		const stylesResetUri = webview.asWebviewUri(styleResetPath);
+		/*const stylesResetUri = webview.asWebviewUri(styleResetPath);
 		const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
 
 		const code = `setcps(1)
@@ -155,36 +155,19 @@ n("<0 1 2 3 4>*8").scale('G4 minor')
 .jux(rev)
 .room(2)
 .sometimes(add(note("12")))
-.lpf(perlin.range(200,20000).slow(4))`;
+.lpf(perlin.range(200,20000).slow(4))`;*/
 
 		// Use a nonce to only allow specific scripts to be run
 //		const nonce = getNonce();
 
-		return `<!DOCTYPE html>
-			<html lang="en">
-			<head>
-				<meta charset="UTF-8">
-
-				<!--
-					Use a content security policy to only allow loading images from https or from our extension directory,
-					and only allow scripts that have a specific nonce.
-				-->
-				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-				<link href="${stylesResetUri}" rel="stylesheet">
-				<link href="${stylesMainUri}" rel="stylesheet">
-				<title>Strudel</title>
-
-			</head>
-			<body>
-
-				Test
-				<strudel-editor>
-    			<!--${code}-->
-				</strudel-editor>
-				<script src="${scriptUri}"></script>
-			<body>
-			</html>`;
+		return `<script src="https://unpkg.com/@strudel/repl@latest"></script>
+<strudel-editor id="repl">
+  <!-- ... -->
+</strudel-editor>
+<script>
+const repl = document.getElementById('repl');
+console.log(repl.editor);
+</script>`;
 	}
 }
 /*

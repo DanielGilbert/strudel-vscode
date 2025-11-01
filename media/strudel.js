@@ -1,8 +1,10 @@
-import { StrudelRepl } from '@strudel/repl';
+// This script will be run within the webview itself
+// It cannot access the main VS Code APIs directly.
 
-const app = () => {
-	() => customElements.define('strudel-editor', StrudelRepl);
-	console.log("test234");
-}
+(function () {
+	const app = () => {
+		console.log("test234");
+	}
 
-document.addEventListener('DOMContentLoaded', app);
+	document.addEventListener('DOMContentLoaded', app);
+}());
