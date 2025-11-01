@@ -419,3 +419,6 @@ FodyWeavers.xsd
 
 # Node Modules
 node_modules/
+
+# Output folder of 
+out/

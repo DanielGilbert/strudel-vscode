@@ -2,7 +2,7 @@
 	"name": "strudel-vscode",
 	"description": "An extension to run strudel in vscode",
 	"version": "0.0.1",
-	"publisher": "Daniel Gilbert",
+	"publisher": "DanielGilbert",
 	"private": true,
 	"license": "AGPL-3.0-only",
 	"repository": {
@@ -16,10 +16,20 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onWebviewPanel:strudelCode"
+		"onWebviewPanel:strudelEditor"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"customEditors": [
+			{
+				"viewType": "strudel.strudelEditor",
+				"displayName": "Strudel",
+				"selector": [
+					{
+						"filenamePattern": "*.str"
+					}
+				]
+			}],
 		"commands": [
 			{
 				"command": "strudel.start",
@@ -35,7 +45,7 @@
 		"watch": "tsc -w -p ./"
 	},
 	"devDependencies": {
-		"@strudel/repl": "1.2.3",
+		"@strudel/repl": "^1.2.3",
 		"@eslint/js": "^9.13.0",
 		"@stylistic/eslint-plugin": "^2.9.0",
 		"@types/node": "^22",
