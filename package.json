@@ -42,16 +42,25 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"lint": "eslint",
-		"watch": "tsc -w -p ./"
+		"watch": "tsc -w -p ./",
+		"build-bridge": "esbuild ./media/strudel.js --bundle --outfile=out/strudel.js --target=es2021"
 	},
 	"devDependencies": {
-		"@strudel/repl": "^1.2.3",
+		"@strudel/repl": "1.2.3",
+		"@strudel/core": "1.2.3",
+		"@strudel/mini": "1.2.3",
+		"@strudel/soundfonts": "1.2.3",
+		"@strudel/tonal": "1.2.3",
+		"@strudel/transpiler": "1.2.3",
+		"@strudel/webaudio": "1.2.3",
+		"@strudel/draw": "1.2.3",
 		"@eslint/js": "^9.13.0",
 		"@stylistic/eslint-plugin": "^2.9.0",
 		"@types/node": "^22",
 		"@types/vscode": "^1.100.0",
 		"@types/vscode-webview": "^1.57.0",
 		"eslint": "^9.13.0",
+        "esbuild": "^0.25.11",
 		"typescript": "^5.9.2",
 		"typescript-eslint": "^8.39.0"
 	}

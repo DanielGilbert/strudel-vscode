@@ -1,10 +1,13 @@
-// @ts-check
+// @ts-ignore
+import * as repl from '@strudel/repl'
+import {EditorState} from '@codemirror/state';
+import {UpdateArgs} from './../src/updateArgs';
 
-// Script run within the webview itself.
-(function () {
-
-	// Get a reference to the VS Code webview api.
+const app = () => {
+// Get a reference to the VS Code webview api.
 	// We use this API to post messages back to our extension.
+
+	repl.prebake();
 
 	// @ts-ignore
 	const vscode = acquireVsCodeApi();
@@ -17,6 +20,11 @@
 		//@ts-ignore
 		/** @type {HTMLElement} */ (document.getElementById('strudelRepl')).editor.setCode(text);
 	}
+				//@ts-ignore
+	/** @type {HTMLElement} */ (document.getElementById('strudelRepl')).addEventListener("update", function (/** @type {CustomEvent} **/ e) {
+			vscode.postMessage({ type: 'update', args: new UpdateArgs(e.detail, true) });
+			console.log(e);
+	});
 
 	// Handle messages sent from the extension to the webview
 	window.addEventListener('message', event => {
@@ -43,4 +51,7 @@
 		// @ts-ignore
 		updateContent(state.text);
 	}
-}());
+
+}
+
+document.addEventListener('DOMContentLoaded', app);
